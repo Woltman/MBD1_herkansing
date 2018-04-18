@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, LoadingController } from 'ionic-angular';
 import { PokemonServiceProvider } from '../../providers/pokemon-service/pokemon-service'
+import { PokemonDetailPage } from '../pokemon-detail/pokemon-detail';
 
 @Component({
   selector: 'page-home',
@@ -10,13 +11,15 @@ export class HomePage {
   pokemon:any[];
   nextPage: string;
 
-  constructor(public navCtrl: NavController, public pokemonService: PokemonServiceProvider, public loadingCtrl: LoadingController) {
+  constructor(public navCtrl: NavController, private pokemonService: PokemonServiceProvider, private loadingCtrl: LoadingController) {
     let loading = this.loadingCtrl.create({
       content: 'Please wait...'
     });
   
     loading.present();
-    this.GetPokemon();
+    setTimeout(() => {
+      this.GetPokemon();
+    }, 500);
     loading.dismiss();
   }
 
@@ -45,5 +48,10 @@ export class HomePage {
       console.log('Async operation has ended');
       infiniteScroll.complete();
     }, 500);
+  }
+
+  public ShowPokemon(pokemonName: string){
+    console.log(`show ${pokemonName}`);
+    this.navCtrl.push(PokemonDetailPage, { name: pokemonName });
   }
 }

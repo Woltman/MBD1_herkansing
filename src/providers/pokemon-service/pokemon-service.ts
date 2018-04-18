@@ -22,6 +22,11 @@ export class PokemonServiceProvider {
     return this.http.get<any[]>(`${this.apiUrl}/pokemon/`);
   }
 
+  public GetPokemonByName(name: string) : Observable<any>{
+    console.log("is called");
+    return this.http.get<any[]>(`${this.apiUrl}/pokemon/${name}/`);
+  }
+
   public Get(url: string) : Observable<any>{
     return this.http.get<any[]>(url);
   }
