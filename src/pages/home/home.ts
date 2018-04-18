@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, LoadingController } from 'ionic-angular';
 import { PokemonServiceProvider } from '../../providers/pokemon-service/pokemon-service'
 import { PokemonDetailPage } from '../pokemon-detail/pokemon-detail';
+import { Geolocation } from '@ionic-native/geolocation';
 
 @Component({
   selector: 'page-home',
@@ -11,7 +12,20 @@ export class HomePage {
   pokemon:any[];
   nextPage: string;
 
-  constructor(public navCtrl: NavController, private pokemonService: PokemonServiceProvider, private loadingCtrl: LoadingController) {
+  constructor(public navCtrl: NavController, private pokemonService: PokemonServiceProvider, private loadingCtrl: LoadingController, private geolocation: Geolocation) {
+    this.geolocation.getCurrentPosition().then((resp) => {
+      console.log("latitude "+resp.coords.latitude)
+      console.log("longitude "+resp.coords.longitude)
+     }).catch((error) => {
+       console.log('Error getting location', error);
+     });
+
+     let watch = this.geolocation.watchPosition();
+      watch.subscribe((data) => {
+        console.log("latitude "+data.coords.latitude)
+        console.log("longitude "+data.coords.longitude)
+      });
+    
     let loading = this.loadingCtrl.create({
       content: 'Please wait...'
     });

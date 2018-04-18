@@ -15,6 +15,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { PokemonServiceProvider } from '../providers/pokemon-service/pokemon-service';
 import { HttpClientModule } from '@angular/common/http';
 
+import { Geolocation } from '@ionic-native/geolocation';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { HttpClientModule } from '@angular/common/http';
     StatusBar,
     SplashScreen,
     PokemonServiceProvider,
+    Geolocation,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
   ]
 })
