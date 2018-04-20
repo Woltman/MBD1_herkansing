@@ -19,6 +19,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 //components
 import { PokemonListComponent } from '../components/pokemon-list/pokemon-list';
+import { LoaderComponent } from '../components/loader/loader';
 
 //service
 import { PokemonServiceProvider } from '../providers/pokemon-service/pokemon-service';
@@ -43,6 +44,7 @@ import { Vibration } from '@ionic-native/vibration';
     PokemonDetailPage,
     CapitalizePipe,
     PokemonListComponent,
+    LoaderComponent,
   ],
   imports: [
     HttpClientModule,

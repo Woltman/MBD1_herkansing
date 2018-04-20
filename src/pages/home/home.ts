@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, LoadingController } from 'ionic-angular';
+import { NavController } from 'ionic-angular';
 import { PokemonServiceProvider } from '../../providers/pokemon-service/pokemon-service'
 import { PokemonDetailPage } from '../pokemon-detail/pokemon-detail';
 import { CapitalizePipe } from '../../pipes/capitalize/capitalize'
@@ -12,16 +12,8 @@ export class HomePage {
   pokemon:any[];
   nextPage: string;
 
-  constructor(public navCtrl: NavController, private pokemonService: PokemonServiceProvider, private loadingCtrl: LoadingController) {
-    let loading = this.loadingCtrl.create({
-      content: 'Please wait...'
-    });
-  
-    loading.present();
-    setTimeout(() => {
-      this.GetPokemon();
-    }, 500);
-    loading.dismiss();
+  constructor(public navCtrl: NavController, private pokemonService: PokemonServiceProvider) {
+    this.GetPokemon();
   }
 
   GetPokemon(){

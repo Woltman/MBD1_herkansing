@@ -5,7 +5,8 @@
 </ion-header>
 
 <ion-content>
-
+  <loader *ngIf="!pokemon"></loader>
+  
   <pokemon-list [pokemon]="pokemon">
     </pokemon-list>
 
