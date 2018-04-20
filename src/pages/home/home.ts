@@ -50,9 +50,4 @@ export class HomePage {
       infiniteScroll.complete();
     }, 500);
   }
-
-  public ShowPokemon(pokemonName: string){
-    console.log(`show ${pokemonName}`);
-    this.navCtrl.push(PokemonDetailPage, { name: pokemonName });
-  }
 }

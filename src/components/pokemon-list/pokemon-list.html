@@ -1,0 +1,6 @@
+<!-- Generated template for the PokemonListComponent component -->
+<ion-list>
+  <ion-item *ngFor="let p of pokemon" (click)="ShowPokemon(p.name)">
+    <h2>{{ p.name | capitalize }}</h2>
+  </ion-item>
+</ion-list>

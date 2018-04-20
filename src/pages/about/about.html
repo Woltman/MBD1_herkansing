@@ -6,11 +6,9 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content>
     <button ion-button full (click)="clearStorage()">Clear storage</button>
     <ion-list>
-        <ion-item *ngFor="let p of pokemon" (click)="ShowPokemon(p)">
-          <h2>{{p}}</h2>
-        </ion-item>
+      <pokemon-list [pokemon]="pokemon"></pokemon-list>
       </ion-list>
 </ion-content>

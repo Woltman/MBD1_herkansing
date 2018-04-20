@@ -99,7 +99,7 @@ export class ContactPage {
     this.catchMessage = "You did it!";
     this.canCatch = false;
 
-    this.pokemonCaughtProvider.catch(this.closestPokemon.name);
+    this.pokemonCaughtProvider.catch(this.closestPokemon.data);
     //this.FoundPokemon(this.closestPokemon.name);
 
     this.removePokemon(this.closestPokemon);

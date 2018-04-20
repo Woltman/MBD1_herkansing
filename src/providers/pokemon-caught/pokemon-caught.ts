@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { OnDestroy } from '@angular/core';
+import { PokemonServiceProvider } from '../../providers/pokemon-service/pokemon-service'
 
 /*
   Generated class for the PokemonCaughtProvider provider.
@@ -11,9 +12,9 @@ import { OnDestroy } from '@angular/core';
 */
 @Injectable()
 export class PokemonCaughtProvider implements OnDestroy {
-  caughtPokemon: string[];
+  caughtPokemon: any[];
 
-  constructor(public http: HttpClient, private storage: Storage) {
+  constructor(public http: HttpClient, private storage: Storage, private pokemonServiceProvider: PokemonServiceProvider) {
     this.caughtPokemon = [];
     storage.get("caughtpokemon")
     .then(result => { if(result != null) JSON.parse(result).forEach(element => {
@@ -23,8 +24,8 @@ export class PokemonCaughtProvider implements OnDestroy {
     .catch(err => console.log(`error: ${err.message}`))
   }
 
-  public catch(name: string){
-    this.caughtPokemon.push(name);
+  public catch(data: any){
+    this.caughtPokemon.push(data);
     this.save();
   }
 

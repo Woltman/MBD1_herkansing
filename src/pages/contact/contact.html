@@ -24,7 +24,7 @@
   <ion-item *ngIf="closestPokemon">
       <h1>Distance to first pokemon</h1>
       <h2>{{distance}}</h2>
-      <h2>{{closestPokemon.name}}</h2>
+      <h2>{{closestPokemon.data.name}}</h2>
       <b>{{catchMessage}}</b>
       <div *ngIf="canCatch">
         <button ion-button full (click)="catch()">Catch {{closestPokemon.name}}</button>
@@ -35,7 +35,7 @@
   <ion-list>
     <ion-item *ngFor="let p of pokemonOnLocations">
       <h2>{{p.id}}</h2>
-      <b>{{p.name}}</b>
+      <b>{{p.data.name}}</b>
       <h2>{{p.latitude}}</h2>
       <h2>{{p.longitude}}</h2>
     </ion-item>

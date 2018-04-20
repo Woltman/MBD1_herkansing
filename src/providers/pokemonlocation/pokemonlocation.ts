@@ -26,11 +26,10 @@ export class PokemonlocationProvider {
       let long = this.getRandomFloat(0.00001, 0.0001) + longitude;
       
       let id = this.getRandomInt(1, 802);
-      let name;
       this.pokemonServiceProvider.GetPokemonById(id).subscribe(data => 
         { 
-          this.pokemonOnLocation.push(new PokemonOnLocation(long, lat, data.name, id));
-        }, error => { name = error.message} );
+          this.pokemonOnLocation.push(new PokemonOnLocation(long, lat, data, id));
+        }, error => { console.log(`error ${error.message}`) });
     }
   }
 

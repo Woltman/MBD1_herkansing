@@ -18,6 +18,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 //components
+import { PokemonListComponent } from '../components/pokemon-list/pokemon-list';
 
 //service
 import { PokemonServiceProvider } from '../providers/pokemon-service/pokemon-service';
@@ -41,6 +42,7 @@ import { Vibration } from '@ionic-native/vibration';
     TabsPage,
     PokemonDetailPage,
     CapitalizePipe,
+    PokemonListComponent,
   ],
   imports: [
     HttpClientModule,

@@ -8,7 +8,7 @@ import { PokemonCaughtProvider } from '../../providers/pokemon-caught/pokemon-ca
   templateUrl: 'about.html'
 })
 export class AboutPage {
-  pokemon: string[];
+  pokemon: any[];
 
   constructor(public navCtrl: NavController, private pokemonCaughtProvider: PokemonCaughtProvider) {
     this.pokemon = pokemonCaughtProvider.getPokemon();
