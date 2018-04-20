@@ -1,6 +1,7 @@
 <ion-header>
   <ion-navbar>
     <ion-title>Home</ion-title>
+    <button class="gototop" ion-button small clear item-end (click)="scrollToTop()">Go to top</button>
   </ion-navbar>
 </ion-header>
 
@@ -13,5 +14,6 @@
   <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
     <ion-infinite-scroll-content></ion-infinite-scroll-content>
   </ion-infinite-scroll>
-
 </ion-content>
+
+

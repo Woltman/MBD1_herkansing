@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { NavController, Content } from 'ionic-angular';
 import { PokemonServiceProvider } from '../../providers/pokemon-service/pokemon-service'
 import { PokemonDetailPage } from '../pokemon-detail/pokemon-detail';
 import { CapitalizePipe } from '../../pipes/capitalize/capitalize'
@@ -11,6 +11,8 @@ import { CapitalizePipe } from '../../pipes/capitalize/capitalize'
 export class HomePage {
   pokemon:any[];
   nextPage: string;
+
+  @ViewChild(Content) content: Content;
 
   constructor(public navCtrl: NavController, private pokemonService: PokemonServiceProvider) {
     this.GetPokemon();
@@ -36,10 +38,21 @@ export class HomePage {
           this.pokemon.push(element);
         });
         this.nextPage = data.next; 
-      })
+      }, err => console.log(`error: ${err.message}`));
 
       console.log('Async operation has ended');
       infiniteScroll.complete();
     }, 500);
+  }
+
+  //not yet solved bug by angular
+  scrollToTop() {
+    try{
+      this.content.scrollToTop();
+    }
+    catch(error){
+      console.log(`error: ${error.message}`)
+    }
+    
   }
 }
