@@ -1,6 +1,10 @@
 <!-- Generated template for the PokemonListComponent component -->
 <ion-list>
+    <ion-item-divider>
+        Pokemon
+      </ion-item-divider>
   <ion-item *ngFor="let p of pokemon" (click)="ShowPokemon(p.name)">
-    <h2>{{ p.name | capitalize }}</h2>
+    <img *ngIf="p.sprites" src="{{p.sprites.front_default}}"/>
+    <div>{{ p.name | capitalize }}</div>
   </ion-item>
 </ion-list>

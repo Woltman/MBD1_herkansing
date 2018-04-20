@@ -34,6 +34,7 @@
   <ion-list-header>Pokemon</ion-list-header>
   <ion-list>
     <ion-item *ngFor="let p of pokemonOnLocations">
+      <img src="{{p.data.sprites.front_default}}"/>
       <h2>{{p.id}}</h2>
       <b>{{p.data.name}}</b>
       <h2>{{p.latitude}}</h2>

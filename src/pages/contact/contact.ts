@@ -31,6 +31,8 @@ export class ContactPage {
     private pokemonLocationProvider: PokemonlocationProvider,
     private pokemonCaughtProvider: PokemonCaughtProvider,
     ) {
+    this.latitude = 0;
+    this.longitude = 0;
 
     this.catchMessage = "Too far away to catch pokemon";
     this.pokemonOnLocations = [];
