@@ -18,13 +18,15 @@ export class PokemonServiceProvider {
   }
 
   public GetPokemon() : Observable<any>{
-    console.log("is called");
     return this.http.get<any[]>(`${this.apiUrl}/pokemon/`);
   }
 
   public GetPokemonByName(name: string) : Observable<any>{
-    console.log("is called");
     return this.http.get<any[]>(`${this.apiUrl}/pokemon/${name}/`);
+  }
+
+  public GetPokemonById(id: number) : Observable<any>{
+    return this.http.get<any[]>(`${this.apiUrl}/pokemon/${id}/`);
   }
 
   public Get(url: string) : Observable<any>{

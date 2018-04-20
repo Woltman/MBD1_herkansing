@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, LoadingController } from 'ionic-angular';
 import { PokemonServiceProvider } from '../../providers/pokemon-service/pokemon-service'
 import { PokemonDetailPage } from '../pokemon-detail/pokemon-detail';
+import { CapitalizePipe } from '../../pipes/capitalize/capitalize'
 
 @Component({
   selector: 'page-home',

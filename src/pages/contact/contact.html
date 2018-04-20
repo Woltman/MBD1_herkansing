@@ -7,11 +7,37 @@
 </ion-header>
 
 <ion-content>
+
+    <button ion-button full (click)="Vibrate()">Vibrate</button>
+    <button ion-button full (click)="newPokemon()">New Pokemon</button>
+    <button ion-button full (click)="foundPokemon('bulbasaur')">Share</button>
+    <button ion-button full (click)="calculateDistance()">Distance</button>
+
   <ion-list>
-    <ion-list-header>Follow us on Twitter</ion-list-header>
     <ion-item>
-      <ion-icon name="ionic" item-start></ion-icon>
-      @ionicframework
+        <h1>My Position</h1>
+        <h2>latitude: {{latitude}}</h2>
+        <h2>longitude: {{longitude}}</h2>
+    </ion-item>
+  </ion-list>
+
+  <ion-item *ngIf="closestPokemon">
+      <h1>Distance to first pokemon</h1>
+      <h2>{{distance}}</h2>
+      <h2>{{closestPokemon.name}}</h2>
+      <b>{{catchMessage}}</b>
+      <div *ngIf="canCatch">
+        <button ion-button full (click)="catch()">Catch {{closestPokemon.name}}</button>
+      </div>
+  </ion-item>
+
+  <ion-list-header>Pokemon</ion-list-header>
+  <ion-list>
+    <ion-item *ngFor="let p of pokemonOnLocations">
+      <h2>{{p.id}}</h2>
+      <b>{{p.name}}</b>
+      <h2>{{p.latitude}}</h2>
+      <h2>{{p.longitude}}</h2>
     </ion-item>
   </ion-list>
 </ion-content>
