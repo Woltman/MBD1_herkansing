@@ -49,7 +49,7 @@ export class ContactPage {
       })).catch(error => console.log(error.message));
   }
 
-  public FoundPokemon(name: string) {
+  public foundPokemon(name: string) {
     this.socialSharing.canShareVia("whatsapp")
     .then(data => this.socialSharing.shareViaWhatsApp(`I found ${name}!!`))
     .catch(err => console.log(`Cant share via Whatsapp ${err.message}`));
