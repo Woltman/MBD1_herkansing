@@ -34,8 +34,6 @@ export class ContactPage {
     private pokemonCaughtProvider: PokemonCaughtProvider,
     private alertCtrl: AlertController
     ) {
-    this.latitude = 0;
-    this.longitude = 0;
 
     this.catchMessage = "Too far away to catch pokemon";
     this.watchLocation();
@@ -54,7 +52,6 @@ export class ContactPage {
 
   public foundPokemon(pokemon: any) {
     this.socialSharing.shareViaWhatsApp(`I caught ${pokemon.name}!!`, `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png`)
-    .then(data => this.socialSharing.shareViaWhatsApp(`I found ${name}!!`))
     .catch(err => console.log(`Cant share via Whatsapp ${err.message}`));
   }
 
@@ -64,7 +61,7 @@ export class ContactPage {
     this.closestPokemon = undefined;
     let dist = 99999;
     if(this.pokemonOnLocations.length > 0){
-      for(var i = 0; i < this.pokemonOnLocations.length-1; i++){
+      for(var i = 0; i < this.pokemonOnLocations.length; i++){
         var pokedist = this.pokemonLocationProvider.distance(this.latitude, this.longitude, this.pokemonOnLocations[i].latitude, this.pokemonOnLocations[i].longitude);
         if(pokedist < dist){
           dist = pokedist;
@@ -112,6 +109,10 @@ export class ContactPage {
     this.showConfirm(this.closestPokemon.data);
 
     this.removePokemon(this.closestPokemon);
+    if(this.pokemonOnLocations.length == 0){
+      this.pokemonOnLocations = undefined;
+    }
+
     this.calculateDistance();
   }
 
@@ -131,7 +132,7 @@ export class ContactPage {
       ],
       buttons: [
         {
-          text: 'Cancel',
+          text: 'Continue',
           role: 'cancel',
           handler: data => {
             console.log('Cancelled');
