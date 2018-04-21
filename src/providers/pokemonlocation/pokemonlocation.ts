@@ -21,16 +21,31 @@ export class PokemonlocationProvider {
 
   public initRandomPokemon(latitude: number, longitude:number){
     this.pokemonOnLocation = [];
-    for(var i = 0; i < 10; i++){
-      let lat = this.getRandomFloat(0.00001,0.0001) + latitude;
-      let long = this.getRandomFloat(0.00001, 0.0001) + longitude;
+    let tempPokemonOnLocation = [];
+    let counter = 0;
+    let p = new Promise((resolve, reject) => {
+      for(let i = 0; i < 10; i++){
+        let lat = this.getRandomFloat(0.00001,0.0001) + latitude;
+        let long = this.getRandomFloat(0.00001, 0.0001) + longitude;
+        let id = this.getRandomInt(1, 802);
+
+        this.pokemonServiceProvider.GetPokemonById(id).subscribe(data => 
+          { 
+            tempPokemonOnLocation.push(new PokemonOnLocation(long, lat, data, id));
+            counter = counter + 1;
+            if(counter == 10){
+              resolve();
+            }
+          }, error => { console.log(`error ${error.message}`) })
+      }
       
-      let id = this.getRandomInt(1, 802);
-      this.pokemonServiceProvider.GetPokemonById(id).subscribe(data => 
-        { 
-          this.pokemonOnLocation.push(new PokemonOnLocation(long, lat, data, id));
-        }, error => { console.log(`error ${error.message}`) });
-    }
+    });
+
+    return p.then(data => { this.pokemonOnLocation = tempPokemonOnLocation; });
+  }
+
+  private getRandomPokemon(){
+
   }
 
   public getPokemon(){

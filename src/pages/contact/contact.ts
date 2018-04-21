@@ -31,13 +31,13 @@ export class ContactPage {
     private pokemonLocationProvider: PokemonlocationProvider,
     private pokemonCaughtProvider: PokemonCaughtProvider,
     ) {
-    this.latitude = 0;
-    this.longitude = 0;
+    // this.latitude = 0;
+    // this.longitude = 0;
 
     this.catchMessage = "Too far away to catch pokemon";
-    this.pokemonOnLocations = [];
+    //this.pokemonOnLocations = [];
     this.watchLocation();
-    this.newPokemon();
+    this.newPokemon().then(data => this.calculateDistance());
   }
 
   private watchLocation(){
@@ -46,8 +46,7 @@ export class ContactPage {
       .then(subs => subs.subscribe(data => {
         this.latitude = data.coords.latitude;
         this.longitude = data.coords.longitude;
-        this.newPokemon();
-        this.calculateDistance();
+        this.newPokemon().then(data => this.calculateDistance());
       })).catch(error => console.log(error.message));
   }
 
@@ -60,6 +59,7 @@ export class ContactPage {
   public calculateDistance(){
     this.closestPokemon = undefined;
     let dist = 99999;
+    console.log(JSON.stringify(this.pokemonOnLocations));
     if(this.pokemonOnLocations.length > 0){
       for(var i = 0; i < this.pokemonOnLocations.length-1; i++){
         var pokedist = this.pokemonLocationProvider.distance(this.latitude, this.longitude, this.pokemonOnLocations[i].latitude, this.pokemonOnLocations[i].longitude);
@@ -82,9 +82,13 @@ export class ContactPage {
   }
 
   public newPokemon(){
-    if(this.latitude != undefined && this.longitude != undefined && this.pokemonOnLocations.length == 0){
-      this.pokemonLocationProvider.initRandomPokemon(this.latitude, this.longitude);
-      this.pokemonOnLocations = this.pokemonLocationProvider.getPokemon();
+    if(this.latitude != undefined && this.longitude != undefined && !this.pokemonOnLocations){
+      return this.pokemonLocationProvider.initRandomPokemon(this.latitude, this.longitude).then(data => {
+        this.pokemonOnLocations = this.pokemonLocationProvider.getPokemon();
+      })
+    }
+    else{
+      return Promise.resolve();
     }
   }
 

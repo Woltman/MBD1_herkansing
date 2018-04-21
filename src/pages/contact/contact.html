@@ -31,8 +31,9 @@
       </div>
   </ion-item>
 
-  <ion-list-header>Pokemon</ion-list-header>
+  <ion-list-header *ngIf="pokemonOnLocations">Pokemon</ion-list-header>
   <ion-list>
+    <loader *ngIf="!pokemonOnLocations"></loader>
     <ion-item *ngFor="let p of pokemonOnLocations">
       <img src="{{p.data.sprites.front_default}}"/>
       <h2>{{p.id}}</h2>
