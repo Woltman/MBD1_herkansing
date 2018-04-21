@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { PokemonDetailPage } from '../../pages/pokemon-detail/pokemon-detail';
 import { CapitalizePipe } from '../../pipes/capitalize/capitalize'
+import { PokemonCaughtProvider } from '../../providers/pokemon-caught/pokemon-caught';
 
 /**
  * Generated class for the PokemonListComponent component.
@@ -16,7 +17,11 @@ import { CapitalizePipe } from '../../pipes/capitalize/capitalize'
 export class PokemonListComponent {
   @Input() pokemon: any[];
 
-  constructor(private navCtrl: NavController) {
+  constructor(private navCtrl: NavController, private pokemonCaughtProvider: PokemonCaughtProvider) {
+  }
+
+  IsCaught(name) {
+    return this.pokemonCaughtProvider.isCaught(name);
   }
 
   public ShowPokemon(pokemonName: string){

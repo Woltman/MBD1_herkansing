@@ -4,7 +4,7 @@ pokemon-list {
         border: 0;
     }
 
-    div {
+    .name {
         display: block;
         font-size: 1em;
         margin-top: 0.1em;
@@ -12,5 +12,21 @@ pokemon-list {
         margin-left: 0.83em;
         margin-right: 0;
         font-weight: normal;
+    }
+
+    .col{
+        border: 1px;
+        border-style: ridge;
+        border-top-color: rgb(204, 204, 204) !important;
+    }
+
+    .pokemon-thumbnail {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .caught {
+        background: #26c740;
     }
 }
