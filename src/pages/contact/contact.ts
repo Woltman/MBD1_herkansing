@@ -52,8 +52,8 @@ export class ContactPage {
       })).catch(error => console.log(error.message));
   }
 
-  public foundPokemon(name: string) {
-    this.socialSharing.canShareVia("whatsapp")
+  public foundPokemon(pokemon: any) {
+    this.socialSharing.shareViaWhatsApp(`I caught ${pokemon.name}!!`, `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png`)
     .then(data => this.socialSharing.shareViaWhatsApp(`I found ${name}!!`))
     .catch(err => console.log(`Cant share via Whatsapp ${err.message}`));
   }
@@ -109,17 +109,17 @@ export class ContactPage {
     this.canCatch = false;
 
     this.pokemonCaughtProvider.catch(this.closestPokemon.data);
-    this.showConfirm(this.closestPokemon.data.name);
+    this.showConfirm(this.closestPokemon.data);
 
     this.removePokemon(this.closestPokemon);
     this.calculateDistance();
   }
 
-  showConfirm(name: string) {
+  showConfirm(pokemon: any) {
     if(!this.showShareAlert) return;
 
     let confirm = this.alertCtrl.create({
-      title: `${name}`,
+      title: `${pokemon.name}`,
       message: `You caught a Pokemon!`,
       inputs: [
         {
@@ -143,7 +143,7 @@ export class ContactPage {
           text: 'Share on WhatsApp',
           handler: data => {
             console.log('Shared');
-            this.foundPokemon(name);
+            this.foundPokemon(pokemon);
           }
         }
       ]
