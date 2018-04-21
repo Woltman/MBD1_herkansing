@@ -38,7 +38,6 @@ export class ContactPage {
     this.longitude = 0;
 
     this.catchMessage = "Too far away to catch pokemon";
-    //this.pokemonOnLocations = [];
     this.watchLocation();
     this.newPokemon().then(data => this.calculateDistance());
   }

@@ -91,4 +91,5 @@
     <plugin name="cordova.plugins.diagnostic" spec="^4.0.5" />
     <plugin name="cordova-plugin-vibration" spec="^3.1.0" />
     <plugin name="cordova-sqlite-storage" spec="^2.3.1" />
+    <engine name="ios" spec="~4.5.4" />
 </widget>
