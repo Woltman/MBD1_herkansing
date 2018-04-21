@@ -30,8 +30,8 @@ import { HttpClientModule } from '@angular/common/http';
 //native
 import { Geolocation } from '@ionic-native/geolocation';
 import { SocialSharing } from '@ionic-native/social-sharing';
-import { AndroidPermissions } from '@ionic-native/android-permissions';
 import { Vibration } from '@ionic-native/vibration';
+import { Diagnostic } from '@ionic-native/diagnostic';
 
 
 @NgModule({
@@ -68,7 +68,7 @@ import { Vibration } from '@ionic-native/vibration';
     SocialSharing,
     Geolocation,
     Vibration,
-    AndroidPermissions,
+    Diagnostic,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     PokemonlocationProvider,
     Events,

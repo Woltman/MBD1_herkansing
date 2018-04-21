@@ -6,8 +6,8 @@ import { PokemonCaughtProvider } from '../../providers/pokemon-caught/pokemon-ca
 //native
 import { Geolocation, Geoposition } from '@ionic-native/geolocation';
 import { SocialSharing } from '@ionic-native/social-sharing';
-import { AndroidPermissions } from '@ionic-native/android-permissions';
 import { Vibration } from '@ionic-native/vibration';
+import { Diagnostic } from '@ionic-native/diagnostic';
 
 @Component({
   selector: 'page-contact',
@@ -28,7 +28,7 @@ export class ContactPage {
   constructor(public navCtrl: NavController,
     private geolocation: Geolocation,
     private socialSharing: SocialSharing,
-    private androidPermissions: AndroidPermissions,
+    private diagnostic: Diagnostic,
     private vibration: Vibration,
     private pokemonLocationProvider: PokemonlocationProvider,
     private pokemonCaughtProvider: PokemonCaughtProvider,
@@ -44,7 +44,7 @@ export class ContactPage {
   }
 
   private watchLocation(){
-    this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.ACCESS_FINE_LOCATION)
+    this.diagnostic.isLocationAuthorized()
       .then(result => this.geolocation.watchPosition({ timeout: 30000, enableHighAccuracy: true }))
       .then(subs => subs.subscribe(data => {
         this.latitude = data.coords.latitude;

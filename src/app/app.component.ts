@@ -3,8 +3,8 @@ import { Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { OnDestroy } from '@angular/core';
+import { Diagnostic } from '@ionic-native/diagnostic';
 
-import { AndroidPermissions } from '@ionic-native/android-permissions';
 import { TabsPage } from '../pages/tabs/tabs';
 
 @Component({
@@ -17,14 +17,15 @@ export class MyApp implements OnDestroy {
   constructor(platform: Platform, 
               statusBar: StatusBar, 
               splashScreen: SplashScreen, 
-              private androidPermissions: AndroidPermissions) {
+              private diagnostic: Diagnostic) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
-      androidPermissions.requestPermission(this.androidPermissions.PERMISSION.ACCESS_FINE_LOCATION).then(
+
+      diagnostic.requestLocationAuthorization(diagnostic.permission.ACCESS_FINE_LOCATION).then(
         result => console.log("permission granted"),
         error => console.log("no permission"),
-      );
+      )
 
       statusBar.styleDefault();
       splashScreen.hide();
