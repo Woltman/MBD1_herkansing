@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, AlertController  } from 'ionic-angular';
 import { PokemonlocationProvider } from '../../providers/pokemonlocation/pokemonlocation';
 import { PokemonOnLocation } from '../../components/pokemon-on-location/pokemon-on-location';
 import { PokemonCaughtProvider } from '../../providers/pokemon-caught/pokemon-caught';
@@ -23,6 +23,8 @@ export class ContactPage {
   catchMessage: string;
   canCatch = false;
 
+  showShareAlert: boolean = true;
+
   constructor(public navCtrl: NavController,
     private geolocation: Geolocation,
     private socialSharing: SocialSharing,
@@ -30,9 +32,10 @@ export class ContactPage {
     private vibration: Vibration,
     private pokemonLocationProvider: PokemonlocationProvider,
     private pokemonCaughtProvider: PokemonCaughtProvider,
+    private alertCtrl: AlertController
     ) {
-    // this.latitude = 0;
-    // this.longitude = 0;
+    this.latitude = 0;
+    this.longitude = 0;
 
     this.catchMessage = "Too far away to catch pokemon";
     //this.pokemonOnLocations = [];
@@ -57,9 +60,10 @@ export class ContactPage {
   }
 
   public calculateDistance(){
+    if(!this.pokemonOnLocations) return;
+
     this.closestPokemon = undefined;
     let dist = 99999;
-    console.log(JSON.stringify(this.pokemonOnLocations));
     if(this.pokemonOnLocations.length > 0){
       for(var i = 0; i < this.pokemonOnLocations.length-1; i++){
         var pokedist = this.pokemonLocationProvider.distance(this.latitude, this.longitude, this.pokemonOnLocations[i].latitude, this.pokemonOnLocations[i].longitude);
@@ -106,9 +110,45 @@ export class ContactPage {
     this.canCatch = false;
 
     this.pokemonCaughtProvider.catch(this.closestPokemon.data);
-    //this.FoundPokemon(this.closestPokemon.name);
+    this.showConfirm(this.closestPokemon.data.name);
 
     this.removePokemon(this.closestPokemon);
     this.calculateDistance();
+  }
+
+  showConfirm(name: string) {
+    if(!this.showShareAlert) return;
+
+    let confirm = this.alertCtrl.create({
+      title: `${name}`,
+      message: `You caught a Pokemon!`,
+      inputs: [
+        {
+          value: 'dontshow',
+          type: "checkbox",
+          label: `Don't show again`,
+          checked: false,
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: data => {
+            console.log('Cancelled');
+            console.log(data);
+            this.showShareAlert = data.length == 0;
+          }
+        },
+        {
+          text: 'Share on WhatsApp',
+          handler: data => {
+            console.log('Shared');
+            this.foundPokemon(name);
+          }
+        }
+      ]
+    });
+    confirm.present();
   }
 }
