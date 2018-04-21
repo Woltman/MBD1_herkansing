@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { NavController, NavParams, Navbar  } from 'ionic-angular';
 import { PokemonServiceProvider } from '../../providers/pokemon-service/pokemon-service'
 
 /**
@@ -14,6 +14,7 @@ import { PokemonServiceProvider } from '../../providers/pokemon-service/pokemon-
   templateUrl: 'pokemon-detail.html',
 })
 export class PokemonDetailPage {
+  @ViewChild(Navbar) navBar: Navbar;
   name: string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private pokemonService: PokemonServiceProvider) {
@@ -22,7 +23,12 @@ export class PokemonDetailPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad PokemonDetailPage');
-    //TODO load bulbasaur detail page
+    this.setBackButtonAction();
   }
 
+  setBackButtonAction(){
+    this.navBar.backButtonClick = () => {
+     this.navCtrl.pop({ animate: true, animation: 'transition', duration: 500, direction: 'back' });
+    }
+  }
 }

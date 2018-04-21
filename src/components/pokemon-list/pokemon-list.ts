@@ -26,6 +26,6 @@ export class PokemonListComponent {
 
   public ShowPokemon(pokemonName: string){
     console.log(`show ${pokemonName}`);
-    this.navCtrl.push(PokemonDetailPage, { name: pokemonName });
+    this.navCtrl.push(PokemonDetailPage, { name: pokemonName }, { animate: true, animation: 'transition', duration: 500, direction: 'forward' });
   }
 }
