@@ -35,7 +35,7 @@
   <ion-list>
     <loader *ngIf="!pokemonOnLocations"></loader>
     <ion-item *ngFor="let p of pokemonOnLocations">
-      <img src="{{p.data.sprites.front_default}}"/>
+      <img [src]="p.data.sprites.front_default" onError="this.src='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/0.png';"/>
       <h2>{{p.id}}</h2>
       <b>{{p.data.name}}</b>
       <h2>{{p.latitude}}</h2>

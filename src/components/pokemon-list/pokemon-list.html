@@ -14,7 +14,8 @@
       Pokemon
     </ion-item-divider>
 <div class="col pokemon-thumbnail" [ngClass]="{'caught': IsCaught(p.name)}" *ngFor="let p of pokemon" (click)="ShowPokemon(p.name)">
-  <img *ngIf="p.sprites" src="{{p.sprites.front_default}}" width="96" height="96"/>
+  <img *ngIf="p.sprites" [src]="p.sprites.front_default"
+  onError="this.src='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/0.png';" width="96" height="96"/>
   <div>{{ p.name | capitalize }}</div>
 </div>
 </div>
