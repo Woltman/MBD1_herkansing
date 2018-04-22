@@ -32,4 +32,8 @@ export class PokemonServiceProvider {
   public Get(url: string) : Observable<any>{
     return this.http.get<any[]>(url);
   }
+
+  public GetSpeciesByName(name: string) : Observable<any>{
+    return this.http.get<any[]>(`${this.apiUrl}/pokemon-species/${name}/`);
+  }
 }
