@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { NavController, NavParams, Navbar  } from 'ionic-angular';
 import { PokemonServiceProvider } from '../../providers/pokemon-service/pokemon-service'
+import { CapitalizePipe } from '../../pipes/capitalize/capitalize'
 
 /**
  * Generated class for the PokemonDetailPage page.

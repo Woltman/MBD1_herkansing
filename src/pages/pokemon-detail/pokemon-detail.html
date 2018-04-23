@@ -12,9 +12,9 @@
 
 </ion-header>
 
-
+<loader *ngIf="!species"></loader>
 <ion-content padding>
-  <h2>{{name}}</h2>
+  <h2>{{name | capitalize}}</h2>
   <h2>{{id}}</h2>
   <h2>{{type}}</h2>
   <h2>{{weight}}</h2>
