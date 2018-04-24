@@ -18,7 +18,8 @@ export class PokemonDetailPage {
   @ViewChild(Navbar) navBar: Navbar;
   name: string;
   id: string;
-  type: string;
+  type1: string;
+  type2: string;
   weight: string;
   height: string;
   species: string;
@@ -32,23 +33,23 @@ export class PokemonDetailPage {
   GetPokemonDetails() {
     this.pokemonService.GetPokemonByName(this.name)
       .subscribe(pokemon => {
-        this.id = pokemon.id;
-        if (pokemon.types.length < 2){
-          this.type = pokemon.types[0].type.name;
-        }
-        else {
-          this.type = pokemon.types[1].type.name + ' + ' + pokemon.types[0].type.name;
-        }
-        this.weight = pokemon.weight;
-        this.height = pokemon.height;
-        
-        this.spriteUrl = pokemon.sprites.front_default;
-
         this.pokemonService.GetSpeciesByName(this.name)
           .subscribe(pokemonSpecies => {
-          this.species = pokemonSpecies.genera[2].genus;
-        });
-        
+            this.species = pokemonSpecies.genera[2].genus;
+
+            this.id = "ID: " + pokemon.id;
+            if (pokemon.types.length < 2){
+              this.type1 = pokemon.types[0].type.name;
+            }
+            else {
+              this.type1 = pokemon.types[1].type.name;
+              this.type2 = pokemon.types[0].type.name;
+            }
+            this.weight = "Weight: " + pokemon.weight;
+            this.height = "Height: " + pokemon.height;
+            
+            this.spriteUrl = pokemon.sprites.front_default;  
+          });      
       });
   }
 
