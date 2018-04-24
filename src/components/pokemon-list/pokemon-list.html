@@ -17,5 +17,6 @@
   <img *ngIf="p.sprites" [src]="p.sprites.front_default"
   onError="this.src='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/0.png';" width="96" height="96"/>
   <div>{{ p.name | capitalize }}</div>
+  <div *ngIf="p.amount">( {{p.amount}} )</div>
 </div>
 </div>

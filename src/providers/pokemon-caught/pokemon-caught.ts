@@ -23,8 +23,18 @@ export class PokemonCaughtProvider implements OnDestroy {
     storage.get("caughtpokemon")
       .then(result => {
         if (result != null) {
+          
           JSON.parse(result).forEach(element => {
-            this.caughtPokemon.push(element);
+            let p = this.caughtPokemon.find(pokemon => pokemon.name == element.name);
+            if(p){
+                if(p.amount){
+                  p.amount++;
+                }
+                else p.amount = 2;
+            }
+            else{
+                this.caughtPokemon.push(element);
+            }
           });
 
           this.caughtPokemonLookup = this.caughtPokemon.reduce(
