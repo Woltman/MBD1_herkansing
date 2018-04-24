@@ -7,18 +7,21 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>PokemonDetail</ion-title>
+    <ion-title>{{name | capitalize}}</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 <loader *ngIf="!species"></loader>
-<ion-content padding>
-  <h2>{{name | capitalize}}</h2>
-  <h2>{{id}}</h2>
-  <h2>{{type}}</h2>
-  <h2>{{weight}}</h2>
-  <h2>{{height}}</h2>
-  <h2>{{species}}</h2>
-  <img src="{{spriteUrl}}" alt="Loading" />
+<ion-content class="detail" padding>
+  <div class="outline">
+    <h2>{{species}}</h2>
+  </div>
+  <div>
+    <img src="{{spriteUrl}}"/>
+    <h2 class="type type-{{type1}}">{{type1 | capitalize}}</h2> 
+    <h2 class="type type-{{type2}}">{{type2 | capitalize}}</h2>
+  </div>
+  <h3>{{id}}</h3>
+  <h3>{{weight}} | {{height}}</h3>
 </ion-content>
