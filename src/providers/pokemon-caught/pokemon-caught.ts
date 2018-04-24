@@ -25,30 +25,29 @@ export class PokemonCaughtProvider implements OnDestroy {
         if (result != null) {
           
           JSON.parse(result).forEach(element => {
-            let p = this.caughtPokemon.find(pokemon => pokemon.name == element.name);
-            if(p){
-                if(p.amount){
-                  p.amount++;
-                }
-                else p.amount = 2;
-            }
-            else{
-                this.caughtPokemon.push(element);
-            }
+            this.addPokemon(element);
           });
-
-          this.caughtPokemonLookup = this.caughtPokemon.reduce(
-            (result, element) => ({ ...result, [element.name]: true }), 
-            { }
-          );
         }
       })
       .catch(err => console.log(`error: ${err.message}`))
   }
 
+  public addPokemon(element:any){
+    let p = this.caughtPokemon.find(pokemon => pokemon.name == element.name);
+    if(p){
+        if(p.amount){
+          p.amount++;
+        }
+        else p.amount = 2;
+    }
+    else{
+        this.caughtPokemon.push(element);
+    }
+    this.caughtPokemonLookup[element.name] = true;
+  }
+
   public catch(data: any) {
-    this.caughtPokemon.push(data);
-    this.caughtPokemonLookup[data.name] = true;
+    this.addPokemon(data);
     this.save();
   }
 
