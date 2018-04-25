@@ -37,16 +37,17 @@ export class PokemonDetailPage {
           .subscribe(pokemonSpecies => {
             this.species = pokemonSpecies.genera[2].genus;
 
-            this.id = "ID: " + pokemon.id;
+            this.id = pokemon.id;
             if (pokemon.types.length < 2){
               this.type1 = pokemon.types[0].type.name;
+              this.type2 = "empty";
             }
             else {
               this.type1 = pokemon.types[1].type.name;
               this.type2 = pokemon.types[0].type.name;
             }
-            this.weight = "Weight: " + pokemon.weight;
-            this.height = "Height: " + pokemon.height;
+            this.weight = pokemon.weight;
+            this.height = pokemon.height;
             
             this.spriteUrl = pokemon.sprites.front_default;  
           });      

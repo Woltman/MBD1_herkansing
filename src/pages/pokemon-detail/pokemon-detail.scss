@@ -17,68 +17,123 @@ page-pokemon-detail {
     $type-dark: #705848;
     $type-steel: #B8B8D0;
     $type-fairy: #EE99AC;
-
+    
     .detail{
         align-content: center;
         text-align: center;
 
         div{
-            outline: 1px solid black;
+            outline: 2px solid black;
+            margin-top: -8px;
         }
+
+        h2{
+            padding: 5px;
+        }
+    }
+
+    .info{
+        padding: 5px;
+    }
+
+    .type {
+        margin-top: -8px;
+        outline-offset: -3px;
+        padding: 8px!important;
+    }
+
+    .float {
+        padding: 18px;
+        clear: both;
+    }
+
+    .left {
+        outline: 0px!important;
+        float: left;
+        padding-left: 15px;
+    }
+    
+    .right {
+        outline: 0px!important;
+        float: right;
+        padding-right: 15px;
+        
+    }
+
+    .type-empty {
+        display: none;
     }
 
     .type-normal {
         background: $type-normal;
+        outline: 2px inset darken($type-normal, 10%);
     }
     .type-fire {
         background: $type-fire;
+        outline: 4px inset darken($type-fire, 5%);
     }
     .type-fighting {
         background: $type-fighting;
+        outline: 4px inset darken($type-fighting, 5%);
     }
     .type-water {
         background: $type-water;
+        outline: 4px inset darken($type-water, 5%);
     }
     .type-flying {
         background: $type-flying;
+        outline: 4px inset darken($type-flying, 5%);
     }
     .type-grass {
         background: $type-grass;
+        outline: 4px inset darken($type-grass, 5%);
     }
     .type-poison {
         background: $type-poison;
+        outline: 4px inset darken($type-poison, 5%);
     }
     .type-electric {
         background: $type-electric;
+        outline: 4px inset darken($type-electric, 5%);
     }
     .type-ground {
         background: $type-ground;
+        outline: 4px inset darken($type-ground, 5%);
     }
     .type-psychic {
         background: $type-psychic;
+        outline: 4px inset darken($type-psychic, 5%);
     }
     .type-rock {
         background: $type-rock;
+        outline: 4px inset darken($type-rock, 5%);
     }
     .type-ice {
         background: $type-ice;
+        outline: 4px inset darken($type-ice, 5%);
     }
     .type-bug {
         background: $type-bug;
+        outline: 4px inset darken($type-bug, 5%);
     }
     .type-dragon {
         background: $type-dragon;
+        outline: 4px inset darken($type-dragon, 5%);
     }
     .type-ghost {
         background: $type-ghost;
+        outline: 4px inset darken($type-ghost, 5%);
     }
     .type-dark {
         background: $type-dark;
+        outline: 4px inset darken($type-dark, 5%);
     }
     .type-steel {
         background: $type-steel;
+        outline: 4px inset darken($type-steel, 5%);
     }
     .type-fairy {
         background: $type-fairy;
+        outline: 4px inset darken($type-fairy, 5%);
     }
 }
