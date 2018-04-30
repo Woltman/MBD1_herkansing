@@ -25,6 +25,9 @@ export class ContactPage {
 
   showShareAlert: boolean = true;
 
+  gettingPokemon: boolean = false;
+  isCatching: boolean = false;
+
   constructor(public navCtrl: NavController,
     private geolocation: Geolocation,
     private socialSharing: SocialSharing,
@@ -37,17 +40,20 @@ export class ContactPage {
 
     this.catchMessage = "Too far away to catch pokemon";
     this.watchLocation();
-    this.newPokemon().then(data => this.calculateDistance());
   }
 
   private watchLocation(){
-    this.diagnostic.isLocationAuthorized()
+    return this.diagnostic.isLocationAuthorized()
       .then(result => this.geolocation.watchPosition({ timeout: 30000, enableHighAccuracy: true }))
       .then(subs => subs.subscribe(data => {
         this.latitude = data.coords.latitude;
         this.longitude = data.coords.longitude;
-        this.newPokemon().then(data => this.calculateDistance());
-      })).catch(error => console.log(error.message));
+
+        if(!this.gettingPokemon){
+            this.newPokemon().then(result => this.calculateDistance());
+        }
+      }))
+      .catch(error => console.log(error.message));
   }
 
   public foundPokemon(pokemon: any) {
@@ -74,6 +80,9 @@ export class ContactPage {
     if(this.distance < 10){
       this.catchMessage = "You can catch this pokemon!!";
       this.canCatch = true;
+      if(!this.isCatching){
+        this.catch();
+      }
     }
     else{
       this.catchMessage = "Too far away to catch this pokemon";
@@ -83,8 +92,10 @@ export class ContactPage {
 
   public newPokemon(){
     if(this.latitude != undefined && this.longitude != undefined && !this.pokemonOnLocations){
+      this.gettingPokemon = true;
       return this.pokemonLocationProvider.initRandomPokemon(this.latitude, this.longitude).then(data => {
         this.pokemonOnLocations = this.pokemonLocationProvider.getPokemon();
+        this.gettingPokemon = false;
       })
     }
     else{
@@ -102,22 +113,41 @@ export class ContactPage {
   }
 
   public catch(){
+    this.isCatching = true;
+    this.vibration.vibrate(500);
     this.catchMessage = "You did it!";
     this.canCatch = false;
 
     this.pokemonCaughtProvider.catch(this.closestPokemon.data);
-    this.showConfirm(this.closestPokemon.data);
+    this.showAlert(this.closestPokemon.data);
 
     this.removePokemon(this.closestPokemon);
     if(this.pokemonOnLocations.length == 0){
       this.pokemonOnLocations = undefined;
     }
+  }
 
-    this.calculateDistance();
+  showAlert(pokemon:any){
+    let alert = this.alertCtrl.create({
+      title: `Catch!`,
+      subTitle: `You caught ${pokemon.name}`,
+      buttons: [
+        {
+          text: 'Ok',
+          handler: data => {
+            this.showConfirm(pokemon);
+          }
+        },
+      ]
+    });
+    alert.present();
   }
 
   showConfirm(pokemon: any) {
-    if(!this.showShareAlert) return;
+    if(!this.showShareAlert) {
+      this.isCatching = false;
+      return;
+    } 
 
     let confirm = this.alertCtrl.create({
       title: `${pokemon.name}`,
@@ -137,6 +167,7 @@ export class ContactPage {
           handler: data => {
             console.log('Cancelled');
             console.log(data);
+            this.isCatching = false;
             this.showShareAlert = data.length == 0;
           }
         },
@@ -145,6 +176,7 @@ export class ContactPage {
           handler: data => {
             console.log('Shared');
             this.foundPokemon(pokemon);
+            this.isCatching = false;
           }
         }
       ]

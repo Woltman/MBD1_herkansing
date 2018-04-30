@@ -26,9 +26,9 @@
       <h2>{{distance}}</h2>
       <h2>{{closestPokemon.data.name}}</h2>
       <b>{{catchMessage}}</b>
-      <div *ngIf="canCatch">
+      <!-- <div *ngIf="canCatch">
         <button ion-button full (click)="catch()">Catch {{closestPokemon.name}}</button>
-      </div>
+      </div> -->
   </ion-item>
 
   <ion-list-header *ngIf="pokemonOnLocations">Pokemon</ion-list-header>

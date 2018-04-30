@@ -25,7 +25,7 @@ export class PokemonCaughtProvider implements OnDestroy {
         if (result != null) {
           
           JSON.parse(result).forEach(element => {
-            this.addPokemon(element);
+              this.addPokemon(element);
           });
         }
       })

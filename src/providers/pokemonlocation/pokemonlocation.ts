@@ -34,6 +34,7 @@ export class PokemonlocationProvider {
             tempPokemonOnLocation.push(new PokemonOnLocation(long, lat, data, id));
             counter = counter + 1;
             if(counter == 10){
+              this.pokemonOnLocation = tempPokemonOnLocation;
               resolve();
             }
           }, error => { console.log(`error ${error.message}`) })
@@ -41,7 +42,7 @@ export class PokemonlocationProvider {
       
     });
 
-    return p.then(data => { this.pokemonOnLocation = tempPokemonOnLocation; });
+    return p;
   }
 
   private getRandomPokemon(){
