@@ -33,7 +33,7 @@ export class PokemonDetailPage {
   GetPokemonDetails() {
     this.pokemonService.GetPokemonByName(this.name)
       .subscribe(pokemon => {
-        this.pokemonService.GetSpeciesByName(this.name)
+        this.pokemonService.GetSpeciesById(pokemon.id)
           .subscribe(pokemonSpecies => {
             this.species = pokemonSpecies.genera[2].genus;
 
