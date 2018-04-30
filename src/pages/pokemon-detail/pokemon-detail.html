@@ -12,27 +12,29 @@
 
 </ion-header>
 
-<loader *ngIf="!species"></loader>
 <ion-content class="detail" padding>
-  <div>
-    <h2>#{{id}} {{name | capitalize}}</h2>
-  </div>
-  <div>
-    <h2>{{species}}</h2>
-  </div>
-  <div>
-    <img src="{{spriteUrl}}"/>
+  <loader *ngIf="!species"></loader>
+  <section *ngIf="species">
     <div>
-      <h2 class="type type-{{type1}}">{{type1 | capitalize}}</h2> 
-      <h2 class="type type-{{type2}}">{{type2 | capitalize}}</h2>
+      <h2>#{{id}} {{name | capitalize}}</h2>
     </div>
-  </div>
-  <div class="float">
-    <div class="left">
-      <h3>Height: {{height}}</h3>
+    <div>
+      <h2>{{species}}</h2>
     </div>
-    <div class="right">
-      <h3>Weight: {{weight}}</h3>
+    <div>
+      <img src="{{spriteUrl}}"/>
+      <div>
+        <h2 class="type type-{{type1}}">{{type1 | capitalize}}</h2> 
+        <h2 class="type type-{{type2}}">{{type2 | capitalize}}</h2>
+      </div>
     </div>
-  </div>
+    <div class="float">
+      <div class="left">
+        <h3>Height: {{height}}</h3>
+      </div>
+      <div class="right">
+        <h3>Weight: {{weight}}</h3>
+      </div>
+    </div>
+  </section>
 </ion-content>
