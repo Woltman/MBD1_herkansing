@@ -12,6 +12,7 @@ loader {
         height: 90px;
         -webkit-animation: spin 2s linear infinite;
         animation: spin 2s linear infinite;
+        outline: none!important;
       }
       
       @-webkit-keyframes spin {
