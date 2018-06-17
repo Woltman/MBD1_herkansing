@@ -24,6 +24,7 @@ export class PokemonDetailPage {
   height: string;
   species: string;
   spriteUrl: string;
+  pokemon: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private pokemonService: PokemonServiceProvider) {
     this.name = navParams.get('name');
@@ -36,20 +37,7 @@ export class PokemonDetailPage {
         this.pokemonService.GetSpeciesById(pokemon.id)
           .subscribe(pokemonSpecies => {
             this.species = pokemonSpecies.genera[2].genus;
-
-            this.id = pokemon.id;
-            if (pokemon.types.length < 2){
-              this.type1 = pokemon.types[0].type.name;
-              this.type2 = "empty";
-            }
-            else {
-              this.type1 = pokemon.types[1].type.name;
-              this.type2 = pokemon.types[0].type.name;
-            }
-            this.weight = pokemon.weight;
-            this.height = pokemon.height;
-            
-            this.spriteUrl = pokemon.sprites.front_default;  
+            this.pokemon = pokemon;
           });      
       });
   }

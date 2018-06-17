@@ -16,24 +16,24 @@
     <loader *ngIf="!species"></loader>
   <div *ngIf="species">
     <div>
-      <h2>#{{id}} {{name | capitalize}}</h2>
+      <h2>#{{pokemon.id}} {{pokemon.name | capitalize}}</h2>
     </div>
     <div>
       <h2>{{species}}</h2>
     </div>
     <div>
-      <img src="{{spriteUrl}}"/>
+      <img src="{{pokemon.sprites.front_default}}"/>
       <div>
-        <h2 class="type type-{{type1}}">{{type1 | capitalize}}</h2> 
-        <h2 class="type type-{{type2}}">{{type2 | capitalize}}</h2>
+        <h2 *ngIf="pokemon.types.length >= 2" class="type type-{{pokemon.types[1].type.name}}">{{pokemon.types[1].type.name | capitalize}}</h2>
+        <h2 class="type type-{{pokemon.types[0].type.name}}">{{pokemon.types[0].type.name | capitalize}}</h2> 
       </div>
     </div>
     <div class="float">
       <div class="left">
-        <h3>Height: {{height}}</h3>
+        <h3>Height: {{pokemon.height}}</h3>
       </div>
       <div class="right">
-        <h3>Weight: {{weight}}</h3>
+        <h3>Weight: {{pokemon.weight}}</h3>
       </div>
     </div>
   </div>
