@@ -13,8 +13,8 @@
 </ion-header>
 
 <ion-content class="detail" padding>
-  <loader *ngIf="!species"></loader>
-  <section *ngIf="species">
+    <loader *ngIf="!species"></loader>
+  <div *ngIf="species">
     <div>
       <h2>#{{id}} {{name | capitalize}}</h2>
     </div>
@@ -36,5 +36,5 @@
         <h3>Weight: {{weight}}</h3>
       </div>
     </div>
-  </section>
+  </div>
 </ion-content>
